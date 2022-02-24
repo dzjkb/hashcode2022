@@ -9,8 +9,17 @@ def aa(dane: Dane):
     return eee
 
 
+def uu(dane: Dane):
+    aaa = dict()
+    for k in dane.contrs:
+        aaa[k.imie] = k.skille
+
+    return aaa
+
+
 def skoruj(projekt_tu_kontrybutors: dict[str, list[str]], dane: Dane):
     projektorsy = aa(dane)
+    kontrorzy = uu(dane)
     kontr_to_dzien = dict()
     # kontrybutor_tu_projekts = dict()
     for p, kontrs in projekt_tu_kontrybutors.items():
@@ -21,6 +30,13 @@ def skoruj(projekt_tu_kontrybutors: dict[str, list[str]], dane: Dane):
         #         kontrybutor_tu_projekts[k] = [p]
 
             kontr_to_dzien[k] = 0
+
+        assert len(kontrs) == len(projektorsy[p].skile), f"projekt {p} ma {len(kontrs)} contributorów a wymaga {len(projektorsy[p].skile)} skili"
+        for k, (s, l) in zip(kontrs, projektorsy[p].skile.items()):
+            if s not in kontrorzy[k].skille:
+                assert False, f"projekt {p} - kontrybutor {k} nie ma skila {s}"
+            kpoz = kontrorzy[k].skille[s]
+            assert kpoz >= l, f"projekt {p} - kontrybutor {k} ma {s} na poziomie {kpoz}, a jest wymagany {l}"
 
     pr_tu_dzienzakonczenia = dict()
     for p, kontrs in projekt_tu_kontrybutors.items():
