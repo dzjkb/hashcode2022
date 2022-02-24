@@ -25,6 +25,9 @@ class Kontrykurwabutor:
     imie: str
     skille: dict[str, int]
 
+    def __hash__(self):
+        return hash(self.imie)
+
 
 @dataclass
 class Dane:
