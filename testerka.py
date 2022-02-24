@@ -49,7 +49,7 @@ def skoruj(projekt_tu_kontrybutors: dict[str, list[str]], dane: Dane):
 
     SKOR_KURWA = 0
     for p in pr_tu_dzienzakonczenia:
-        pskor = max(0, projektorsy[p].skor - (pr_tu_dzienzakonczenia[p] - projektorsy[p].best_bifor))
+        pskor = max(0, projektorsy[p].skor - max(pr_tu_dzienzakonczenia[p] - projektorsy[p].best_bifor, 0))
         SKOR_KURWA += pskor
 
     return SKOR_KURWA
