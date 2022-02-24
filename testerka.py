@@ -33,9 +33,9 @@ def skoruj(projekt_tu_kontrybutors: dict[str, list[str]], dane: Dane):
 
         assert len(kontrs) == len(projektorsy[p].skile), f"projekt {p} ma {len(kontrs)} contributorów a wymaga {len(projektorsy[p].skile)} skili"
         for k, (s, l) in zip(kontrs, projektorsy[p].skile.items()):
-            if s not in kontrorzy[k].skille:
+            if s not in kontrorzy[k]:
                 assert False, f"projekt {p} - kontrybutor {k} nie ma skila {s}"
-            kpoz = kontrorzy[k].skille[s]
+            kpoz = kontrorzy[k][s]
             assert kpoz >= l, f"projekt {p} - kontrybutor {k} ma {s} na poziomie {kpoz}, a jest wymagany {l}"
 
     pr_tu_dzienzakonczenia = dict()
